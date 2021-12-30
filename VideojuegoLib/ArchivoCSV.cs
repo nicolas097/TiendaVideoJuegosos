@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace VideojuegoLib
 {
-    public  class ArchivoCSV
+    public class ArchivoCSV
     {
         public List<VideoJuego> VideoJuegoListFromCSV(string csvPath)
         {
@@ -50,7 +46,7 @@ namespace VideojuegoLib
         }
 
 
-        public int GenerateId (List<int> VideoJuegoIds)
+        public int GenerateId(List<int> VideoJuegoIds)
         {
             //sort ordena de menor a mayor y en caso de ser una lista de tipo string, ordena alfabeticamente la lista   
             VideoJuegoIds.Sort();
@@ -65,24 +61,44 @@ namespace VideojuegoLib
                 }
                 else
                 {
-                    return idSequence;  
+                    return idSequence;
                 }
             }
             return idSequence;
         }
 
-       
+
         public void AddVideoJuego(VideoJuego vid, List<VideoJuego> ListaAgregacion)
         {
-           
+
             if (ListaAgregacion.Count > 0)
             {
                 vid.id = GenerateId(ListaAgregacion.Select(s => s.id).ToList());
                 ListaAgregacion.Add(vid);
-               
             }
-                        
+
         }
+
+
+        public bool DeleteVideoJuego(VideoJuego vid, List<VideoJuego> ListaEliminacion)
+        {
+
+            foreach (var juego in ListaEliminacion)
+            {
+                if (juego.nombre == vid.nombre)
+                {
+                    ListaEliminacion.Remove(juego);
+                    return true;
+                }
+             
+            }
+            return false;
+           
+            
+        }
+
+
+        
 
     }
 }

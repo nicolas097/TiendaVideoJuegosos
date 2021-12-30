@@ -34,8 +34,6 @@ namespace TiendaVideojuegos
 
                 ListaVideoJuego = openCsv.VideoJuegoListFromCSV(openFile.FileName);
                 ReloadDataGrid();
-
-                
             }
         }
 
@@ -53,8 +51,7 @@ namespace TiendaVideojuegos
 
             if (saveFile.ShowDialog() == DialogResult.OK)
             {
-                 openCsv.SaveCSVFromVideoJuegoList(ListaVideoJuego, saveFile.FileName);
-                 
+                 openCsv.SaveCSVFromVideoJuegoList(ListaVideoJuego, saveFile.FileName);    
             }
         }
 
@@ -66,15 +63,79 @@ namespace TiendaVideojuegos
               openCsv.AddVideoJuego(video, ListaVideoJuego);
               ReloadDataGrid();
               MessageBox.Show("Se Agregó algo");
-            
-
         }
 
 
         private void ReloadDataGrid()
         {
+            dgVideoJuegos.DataSource = null;
             //La fuente de datos pase a tener datos
             dgVideoJuegos.DataSource = ListaVideoJuego;
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtEliminar.Text))
+            {
+                MessageBox.Show("Ingrese el Id del VideoJuego");
+            }
+            else
+            {
+                VideoJuego videoJu = new VideoJuego();
+                videoJu.nombre = txtEliminar.Text;
+                if (openCsv.DeleteVideoJuego(videoJu, ListaVideoJuego))
+                {
+                    ReloadDataGrid();
+                    MessageBox.Show("Se eliminó algo");
+                }
+                else
+                {
+                    MessageBox.Show("No se elminó nada");
+                }
+                
+               
+            }
+           
+        }
+
+        private void btnContCantVid_Click(object sender, EventArgs e)
+        {
+            int cantidad = ListaVideoJuego.Count();
+            MessageBox.Show("Cantidad de videojuegos " + cantidad);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int cantidadPorPlataforma = ListaVideoJuego.Where(s => s.plataforma == cbContCantVidPorPlat.Text).Count() ;
+            MessageBox.Show("Cantidad por plataforma es :" + cantidadPorPlataforma);
+        }
+
+        
+
+        //int cantidadPorCadena = ListaVideoJuego.Where(s => s.nombre.Contains(txtContCantVidPorCad.Text)).Count();
+        //MessageBox.Show("Cantidad por cadena es :" + cantidadPorCadena);
+
+        private void btnMostHor_Click(object sender, EventArgs e)
+        {
+            string horaActual = DateTime.Now.ToString("HH");
+            MessageBox.Show("La hora actual es : " + horaActual);
+        }
+
+        private void btnNoTocar10vec_Click(object sender, EventArgs e)
+        {
+           
+            
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnContPorCadena_Click(object sender, EventArgs e)
+        {
+            int cantidadPorCadena = ListaVideoJuego.Where(s => s.nombre.Contains(txtContCantVidPorCad.Text)).Count();
+            MessageBox.Show("Cantidad por cadena es :" + cantidadPorCadena);
         }
     }
 }

@@ -51,8 +51,8 @@
             this.btnObtNomUsuario = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.txtCantVidPorCad = new System.Windows.Forms.TextBox();
+            this.btnContPorCadena = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.txtContCantVidPorCad = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -105,7 +105,7 @@
             this.dgVideoJuegos.Location = new System.Drawing.Point(26, 223);
             this.dgVideoJuegos.Name = "dgVideoJuegos";
             this.dgVideoJuegos.RowTemplate.Height = 25;
-            this.dgVideoJuegos.Size = new System.Drawing.Size(852, 192);
+            this.dgVideoJuegos.Size = new System.Drawing.Size(852, 244);
             this.dgVideoJuegos.TabIndex = 6;
             // 
             // button1
@@ -234,6 +234,7 @@
             this.btnEliminar.TabIndex = 0;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // tabPage2
             // 
@@ -268,6 +269,7 @@
             this.btnNoTocar10vec.TabIndex = 2;
             this.btnNoTocar10vec.Text = "NO TOCAR MÁS DE 10 VECES";
             this.btnNoTocar10vec.UseVisualStyleBackColor = true;
+            this.btnNoTocar10vec.Click += new System.EventHandler(this.btnNoTocar10vec_Click);
             // 
             // btnMostHor
             // 
@@ -277,6 +279,7 @@
             this.btnMostHor.TabIndex = 1;
             this.btnMostHor.Text = "Mostrar Hora Actual";
             this.btnMostHor.UseVisualStyleBackColor = true;
+            this.btnMostHor.Click += new System.EventHandler(this.btnMostHor_Click);
             // 
             // btnObtNomUsuario
             // 
@@ -302,8 +305,8 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.textBox1);
-            this.groupBox6.Controls.Add(this.button4);
+            this.groupBox6.Controls.Add(this.txtCantVidPorCad);
+            this.groupBox6.Controls.Add(this.btnContPorCadena);
             this.groupBox6.Location = new System.Drawing.Point(30, 221);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(395, 106);
@@ -311,21 +314,23 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Contar Por cadena";
             // 
-            // textBox1
+            // txtCantVidPorCad
             // 
-            this.textBox1.Location = new System.Drawing.Point(149, 69);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 3;
+            this.txtCantVidPorCad.Location = new System.Drawing.Point(137, 69);
+            this.txtCantVidPorCad.Name = "txtCantVidPorCad";
+            this.txtCantVidPorCad.Size = new System.Drawing.Size(121, 23);
+            this.txtCantVidPorCad.TabIndex = 3;
+            this.txtCantVidPorCad.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // button4
+            // btnContPorCadena
             // 
-            this.button4.Location = new System.Drawing.Point(78, 22);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(233, 41);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Contar cantidad de videojuegos por cadena";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnContPorCadena.Location = new System.Drawing.Point(78, 22);
+            this.btnContPorCadena.Name = "btnContPorCadena";
+            this.btnContPorCadena.Size = new System.Drawing.Size(233, 41);
+            this.btnContPorCadena.TabIndex = 2;
+            this.btnContPorCadena.Text = "Contar cantidad de videojuegos por cadena";
+            this.btnContPorCadena.UseVisualStyleBackColor = true;
+            this.btnContPorCadena.Click += new System.EventHandler(this.btnContPorCadena_Click);
             // 
             // groupBox5
             // 
@@ -368,6 +373,10 @@
             // cbContCantVidPorPlat
             // 
             this.cbContCantVidPorPlat.FormattingEnabled = true;
+            this.cbContCantVidPorPlat.Items.AddRange(new object[] {
+            "xone",
+            "pc",
+            "ps4"});
             this.cbContCantVidPorPlat.Location = new System.Drawing.Point(137, 69);
             this.cbContCantVidPorPlat.Name = "cbContCantVidPorPlat";
             this.cbContCantVidPorPlat.Size = new System.Drawing.Size(121, 23);
@@ -381,6 +390,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Contar cantidad de videojuegos por plataforma";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnContCantVid
             // 
@@ -390,6 +400,7 @@
             this.btnContCantVid.TabIndex = 0;
             this.btnContCantVid.Text = "Contar cantidad de videojuegos";
             this.btnContCantVid.UseVisualStyleBackColor = true;
+            this.btnContCantVid.Click += new System.EventHandler(this.btnContCantVid_Click);
             // 
             // Form1
             // 
@@ -447,8 +458,8 @@
         private Button btnMostHor;
         private Button btnObtNomUsuario;
         private GroupBox groupBox6;
-        private TextBox textBox1;
-        private Button button4;
+        private TextBox txtCantVidPorCad;
+        private Button btnContPorCadena;
         private GroupBox groupBox5;
         private TextBox txtContCantVidPorCad;
         private Button button3;
