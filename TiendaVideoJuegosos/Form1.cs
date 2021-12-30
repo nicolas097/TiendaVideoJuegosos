@@ -1,10 +1,13 @@
 using VideojuegoLib;
 
-namespace TiendaVideojuegosos
+namespace TiendaVideojuegos
 {
     public partial class Form1 : Form
     {
         ArchivoCSV openCsv = new ArchivoCSV();
+
+        List<VideoJuego> ListaVideoJuego = new List<VideoJuego>();
+       
 
         public Form1()
         {
@@ -28,7 +31,11 @@ namespace TiendaVideojuegosos
 
             if (openFile.ShowDialog() == DialogResult.OK)
             {
-                dgVideoJuegos.DataSource = openCsv.VideoJuegoListFromCSV(openFile.FileName);
+
+                ListaVideoJuego = openCsv.VideoJuegoListFromCSV(openFile.FileName);
+                ReloadDataGrid();
+
+                
             }
         }
 
@@ -46,8 +53,28 @@ namespace TiendaVideojuegosos
 
             if (saveFile.ShowDialog() == DialogResult.OK)
             {
-                openCsv.SaveCSVFromVideoJuegoList((List<VideoJuego>)dgVideoJuegos.DataSource, saveFile.FileName);
+                 openCsv.SaveCSVFromVideoJuegoList(ListaVideoJuego, saveFile.FileName);
+                 
             }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+              VideoJuego video = new VideoJuego();
+              video.nombre = txtNombre.Text;
+              video.plataforma = cbPlataforma.Text;
+              openCsv.AddVideoJuego(video, ListaVideoJuego);
+              ReloadDataGrid();
+              MessageBox.Show("Se Agregó algo");
+            
+
+        }
+
+
+        private void ReloadDataGrid()
+        {
+            //La fuente de datos pase a tener datos
+            dgVideoJuegos.DataSource = ListaVideoJuego;
         }
     }
 }

@@ -1,4 +1,5 @@
-using TiendaVideojuegosos;
+using TiendaVideojuegos;
+using TiendaVideoJuegosos;
 
 namespace TiendaVideoJuegosos
 {

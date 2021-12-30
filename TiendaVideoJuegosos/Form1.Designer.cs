@@ -1,4 +1,4 @@
-﻿namespace TiendaVideojuegosos
+﻿namespace TiendaVideojuegos
 {
     partial class Form1
     {
@@ -148,12 +148,17 @@
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(160, 23);
             this.btnAgregar.TabIndex = 3;
-            this.btnAgregar.Text = "Buscar";
+            this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // cbPlataforma
             // 
             this.cbPlataforma.FormattingEnabled = true;
+            this.cbPlataforma.Items.AddRange(new object[] {
+            "xone",
+            "pc",
+            "ps4"});
             this.cbPlataforma.Location = new System.Drawing.Point(28, 93);
             this.cbPlataforma.Name = "cbPlataforma";
             this.cbPlataforma.Size = new System.Drawing.Size(160, 23);

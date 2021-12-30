@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VideojuegoLib
 {
-    public class ArchivoCSV
+    public  class ArchivoCSV
     {
         public List<VideoJuego> VideoJuegoListFromCSV(string csvPath)
         {
@@ -29,7 +29,6 @@ namespace VideojuegoLib
                 }
 
             }
-
             return videoAlboCampeon;
         }
 
@@ -47,12 +46,43 @@ namespace VideojuegoLib
             }
 
             File.WriteAllText(csvPath, sb.ToString());
-            //hOLA MUNDO
+
         }
 
 
-       
+        public int GenerateId (List<int> VideoJuegoIds)
+        {
+            //sort ordena de menor a mayor y en caso de ser una lista de tipo string, ordena alfabeticamente la lista   
+            VideoJuegoIds.Sort();
 
+            int idSequence = 1;
+            foreach (var item in VideoJuegoIds)
+            {
+                if (idSequence == item)
+                {
+                    //aumenta de 1 en 1 la lista 
+                    idSequence++;
+                }
+                else
+                {
+                    return idSequence;  
+                }
+            }
+            return idSequence;
+        }
+
+       
+        public void AddVideoJuego(VideoJuego vid, List<VideoJuego> ListaAgregacion)
+        {
+           
+            if (ListaAgregacion.Count > 0)
+            {
+                vid.id = GenerateId(ListaAgregacion.Select(s => s.id).ToList());
+                ListaAgregacion.Add(vid);
+               
+            }
+                        
+        }
 
     }
 }
