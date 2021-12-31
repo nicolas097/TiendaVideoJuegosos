@@ -23,7 +23,6 @@ namespace VideojuegoLib
                     videoAlboCampeon.Add(vid);
 
                 }
-
             }
             return videoAlboCampeon;
         }
@@ -31,7 +30,6 @@ namespace VideojuegoLib
 
         public void SaveCSVFromVideoJuegoList(List<VideoJuego> videoJuego, string csvPath)
         {
-
             StringBuilder sb = new StringBuilder();
             //es un constructor de cadena 
             sb.AppendLine("id,nombre,plataforma");
@@ -42,7 +40,6 @@ namespace VideojuegoLib
             }
 
             File.WriteAllText(csvPath, sb.ToString());
-
         }
 
 
@@ -90,15 +87,24 @@ namespace VideojuegoLib
                     ListaEliminacion.Remove(juego);
                     return true;
                 }
-             
             }
-            return false;
-           
-            
+            return false;   
         }
 
 
-        
 
+        public bool SearchVideoJuego(VideoJuego video, List<VideoJuego> ListaDeBusqueda)
+        {
+            foreach (var juego in ListaDeBusqueda)
+            {
+                if (juego.nombre == video.nombre)
+                {
+                    //ListaDeBusqueda.Exists(video => video == juego); 
+                    return true;
+                    
+                }
+            }
+            return false;
+        }
     }
 }

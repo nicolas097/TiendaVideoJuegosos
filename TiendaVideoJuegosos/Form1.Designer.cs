@@ -50,9 +50,6 @@
             this.btnMostHor = new System.Windows.Forms.Button();
             this.btnObtNomUsuario = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.txtCantVidPorCad = new System.Windows.Forms.TextBox();
-            this.btnContPorCadena = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.txtContCantVidPorCad = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -68,7 +65,6 @@
             this.tabPage2.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
@@ -225,6 +221,7 @@
             this.btnBuscar.TabIndex = 1;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnEliminar
             // 
@@ -254,7 +251,7 @@
             this.groupBox7.Controls.Add(this.btnNoTocar10vec);
             this.groupBox7.Controls.Add(this.btnMostHor);
             this.groupBox7.Controls.Add(this.btnObtNomUsuario);
-            this.groupBox7.Location = new System.Drawing.Point(253, 371);
+            this.groupBox7.Location = new System.Drawing.Point(253, 372);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(448, 106);
             this.groupBox7.TabIndex = 5;
@@ -263,7 +260,7 @@
             // 
             // btnNoTocar10vec
             // 
-            this.btnNoTocar10vec.Location = new System.Drawing.Point(129, 61);
+            this.btnNoTocar10vec.Location = new System.Drawing.Point(128, 77);
             this.btnNoTocar10vec.Name = "btnNoTocar10vec";
             this.btnNoTocar10vec.Size = new System.Drawing.Size(191, 23);
             this.btnNoTocar10vec.TabIndex = 2;
@@ -273,7 +270,7 @@
             // 
             // btnMostHor
             // 
-            this.btnMostHor.Location = new System.Drawing.Point(251, 32);
+            this.btnMostHor.Location = new System.Drawing.Point(257, 32);
             this.btnMostHor.Name = "btnMostHor";
             this.btnMostHor.Size = new System.Drawing.Size(191, 23);
             this.btnMostHor.TabIndex = 1;
@@ -283,16 +280,16 @@
             // 
             // btnObtNomUsuario
             // 
-            this.btnObtNomUsuario.Location = new System.Drawing.Point(20, 32);
+            this.btnObtNomUsuario.Location = new System.Drawing.Point(30, 32);
             this.btnObtNomUsuario.Name = "btnObtNomUsuario";
             this.btnObtNomUsuario.Size = new System.Drawing.Size(191, 23);
             this.btnObtNomUsuario.TabIndex = 0;
             this.btnObtNomUsuario.Text = "Obtener nombre de usuario";
             this.btnObtNomUsuario.UseVisualStyleBackColor = true;
+            this.btnObtNomUsuario.Click += new System.EventHandler(this.btnObtNomUsuario_Click);
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.groupBox6);
             this.groupBox3.Controls.Add(this.groupBox5);
             this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.btnContCantVid);
@@ -303,40 +300,11 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Funciones Contar";
             // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.txtCantVidPorCad);
-            this.groupBox6.Controls.Add(this.btnContPorCadena);
-            this.groupBox6.Location = new System.Drawing.Point(30, 221);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(395, 106);
-            this.groupBox6.TabIndex = 4;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Contar Por cadena";
-            // 
-            // txtCantVidPorCad
-            // 
-            this.txtCantVidPorCad.Location = new System.Drawing.Point(137, 69);
-            this.txtCantVidPorCad.Name = "txtCantVidPorCad";
-            this.txtCantVidPorCad.Size = new System.Drawing.Size(121, 23);
-            this.txtCantVidPorCad.TabIndex = 3;
-            this.txtCantVidPorCad.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // btnContPorCadena
-            // 
-            this.btnContPorCadena.Location = new System.Drawing.Point(78, 22);
-            this.btnContPorCadena.Name = "btnContPorCadena";
-            this.btnContPorCadena.Size = new System.Drawing.Size(233, 41);
-            this.btnContPorCadena.TabIndex = 2;
-            this.btnContPorCadena.Text = "Contar cantidad de videojuegos por cadena";
-            this.btnContPorCadena.UseVisualStyleBackColor = true;
-            this.btnContPorCadena.Click += new System.EventHandler(this.btnContPorCadena_Click);
-            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.txtContCantVidPorCad);
             this.groupBox5.Controls.Add(this.button3);
-            this.groupBox5.Location = new System.Drawing.Point(30, 221);
+            this.groupBox5.Location = new System.Drawing.Point(30, 211);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(395, 106);
             this.groupBox5.TabIndex = 4;
@@ -358,6 +326,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "Contar cantidad de videojuegos por cadena";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // groupBox4
             // 
@@ -420,8 +389,6 @@
             this.tabPage2.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -457,9 +424,6 @@
         private Button btnNoTocar10vec;
         private Button btnMostHor;
         private Button btnObtNomUsuario;
-        private GroupBox groupBox6;
-        private TextBox txtCantVidPorCad;
-        private Button btnContPorCadena;
         private GroupBox groupBox5;
         private TextBox txtContCantVidPorCad;
         private Button button3;
