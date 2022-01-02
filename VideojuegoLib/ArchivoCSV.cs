@@ -65,14 +65,24 @@ namespace VideojuegoLib
         }
 
 
-        public void AddVideoJuego(VideoJuego vid, List<VideoJuego> ListaAgregacion)
+        public bool AddVideoJuego(VideoJuego vid, List<VideoJuego> ListaAgregacion)
         {
-
+           
             if (ListaAgregacion.Count > 0)
             {
-                vid.id = GenerateId(ListaAgregacion.Select(s => s.id).ToList());
-                ListaAgregacion.Add(vid);
+                if (!ListaAgregacion.Exists(s => s.nombre == vid.nombre && s.plataforma == vid.plataforma))
+                {
+                    vid.id = GenerateId(ListaAgregacion.Select(s => s.id).ToList());
+                    ListaAgregacion.Add(vid);
+                    return true;
+
+                }
+                else
+                {
+                   return false;    
+                }
             }
+            return false;
 
         }
 
@@ -101,7 +111,6 @@ namespace VideojuegoLib
                 {
                     //ListaDeBusqueda.Exists(video => video == juego); 
                     return true;
-                    
                 }
             }
             return false;

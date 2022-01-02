@@ -142,9 +142,16 @@ namespace TiendaVideojuegos
                     VideoJuego video = new VideoJuego();
                     video.nombre = txtNombre.Text;
                     video.plataforma = cbPlataforma.Text;
-                    openCsv.AddVideoJuego(video, ListaVideoJuego);
-                    ReloadDataGrid();
-                    MessageBox.Show($"Se Agregó el videojuego: {video.nombre}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (openCsv.AddVideoJuego(video, ListaVideoJuego))
+                    {
+                        MessageBox.Show($"Se Agregó el videojuego: {video.nombre}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ReloadDataGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No es posible agregar un juego con el mismo nombre y plataforma que uno ya existente en la lista.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                  
                 }
             }
             else

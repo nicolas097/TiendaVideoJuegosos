@@ -342,6 +342,7 @@
             // 
             // cbContCantVidPorPlat
             // 
+            this.cbContCantVidPorPlat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbContCantVidPorPlat.FormattingEnabled = true;
             this.cbContCantVidPorPlat.Items.AddRange(new object[] {
             "xone",
