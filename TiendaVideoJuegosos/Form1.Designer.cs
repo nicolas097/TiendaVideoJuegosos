@@ -275,7 +275,7 @@
             this.btnMostHor.Name = "btnMostHor";
             this.btnMostHor.Size = new System.Drawing.Size(191, 23);
             this.btnMostHor.TabIndex = 1;
-            this.btnMostHor.Text = "Mostrar Hora Actual";
+            this.btnMostHor.Text = "Mostrar fecha completa actual";
             this.btnMostHor.UseVisualStyleBackColor = true;
             this.btnMostHor.Click += new System.EventHandler(this.btnMostHor_Click);
             // 

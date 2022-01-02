@@ -57,27 +57,61 @@ namespace TiendaVideojuegos
 
             if (openFile.ShowDialog() == DialogResult.OK)
             {
-                ListaVideoJuego = openCsv.VideoJuegoListFromCSV(openFile.FileName);
-                csv = true;
-                ReloadDataGrid();
-                button1.Enabled = true;
-                btnEliminar.Enabled = true;
-                btnAgregar.Enabled = true;
-                cbContCantVidPorPlat.Enabled = true;
-                btnBuscar.Enabled = true;
-                txtBuscar.Enabled = true;
-                txtEliminar.Enabled = true;
-                txtContCantVidPorCad.Enabled = true;
-                cbPlataforma.Enabled = true;
-                txtNombre.Enabled = true;
-                button2.Enabled = true;
-                button3.Enabled = true;
-                txtContCantVidPorCad.Enabled = true;
-                btnContCantVid.Enabled = true;
+                if (IsReadableCSV(openFile.FileName))
+                {
+                    ListaVideoJuego = openCsv.VideoJuegoListFromCSV(openFile.FileName);
+                    csv = true;
+                    ReloadDataGrid();
+                    button1.Enabled = true;
+                    btnEliminar.Enabled = true;
+                    btnAgregar.Enabled = true;
+                    cbContCantVidPorPlat.Enabled = true;
+                    btnBuscar.Enabled = true;
+                    txtBuscar.Enabled = true;
+                    txtEliminar.Enabled = true;
+                    txtContCantVidPorCad.Enabled = true;
+                    cbPlataforma.Enabled = true;
+                    txtNombre.Enabled = true;
+                    button2.Enabled = true;
+                    button3.Enabled = true;
+                    txtContCantVidPorCad.Enabled = true;
+                    btnContCantVid.Enabled = true;
+                }
+          
             }
 
 
         }
+
+
+        private bool IsReadableCSV(string csvpath)
+        {
+            bool validFormat = File.ReadAllLines(csvpath)[0].Contains("id,nombre,plataforma");
+            bool isEmpty = File.ReadAllLines(csvpath).Length <= 1;
+
+            if (validFormat)
+            {
+                if (!isEmpty)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("El archivo .CSV no contiene datos, inténtelo con otro archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("El archivo .CSV no tiene el formato correcto, inténtelo con otro .CSV", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
+            return false;
+        }
+
+
+
 
 
         private void tabPage1_Click(object sender, EventArgs e)
