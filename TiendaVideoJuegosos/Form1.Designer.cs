@@ -350,6 +350,7 @@
             this.cbContCantVidPorPlat.Name = "cbContCantVidPorPlat";
             this.cbContCantVidPorPlat.Size = new System.Drawing.Size(121, 23);
             this.cbContCantVidPorPlat.TabIndex = 3;
+            this.cbContCantVidPorPlat.SelectedIndexChanged += new System.EventHandler(this.cbContCantVidPorPlat_SelectedIndexChanged);
             // 
             // button2
             // 

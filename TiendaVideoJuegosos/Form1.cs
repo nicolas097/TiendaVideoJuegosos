@@ -10,10 +10,14 @@ namespace TiendaVideojuegos
        
         int contador = 0;
 
+        bool csv = false;
+
+        
 
         public Form1()
         {
             InitializeComponent();
+            button1.Enabled = false;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -28,16 +32,20 @@ namespace TiendaVideojuegos
 
         private void btnAbrirCSV_Click(object sender, EventArgs e)
         {
+          //Se crea un objeto de OpenFileDialog
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "csv files (*.csv)|*.csv";
 
             if (openFile.ShowDialog() == DialogResult.OK)
             {
-
                 ListaVideoJuego = openCsv.VideoJuegoListFromCSV(openFile.FileName);
+                csv = true;
                 ReloadDataGrid();
+                
             }
+            button1.Enabled = true;
         }
+
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
@@ -59,13 +67,47 @@ namespace TiendaVideojuegos
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-              VideoJuego video = new VideoJuego();
-              video.nombre = txtNombre.Text;
-              video.plataforma = cbPlataforma.Text;
-              openCsv.AddVideoJuego(video, ListaVideoJuego);
-              ReloadDataGrid();
-              MessageBox.Show($"Se Agregó el videojuego: {video.nombre}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            if (csv)
+            {
+                if (SePuedeAgregar())
+                {
+                    VideoJuego video = new VideoJuego();
+                    video.nombre = txtNombre.Text;
+                    video.plataforma = cbPlataforma.Text;
+                    openCsv.AddVideoJuego(video, ListaVideoJuego);
+                    ReloadDataGrid();
+                    MessageBox.Show($"Se Agregó el videojuego: {video.nombre}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Cargué el archivo csv", "Adevertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
+
+       private bool SePuedeAgregar()
+       {
+            if (txtNombre.Text == string.Empty && cbPlataforma.Text == string.Empty)
+            {
+                MessageBox.Show("No se ha selecionado el nombre ni la plataforma", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (txtNombre.Text == string.Empty)
+            {
+                MessageBox.Show("Introduza un nombre.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (cbPlataforma.Text == string.Empty)
+            {
+                MessageBox.Show("Seleccione una plataforma.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                return true;
+            }
+
+            return false;
+            
+       }
 
 
         private void ReloadDataGrid()
@@ -79,7 +121,7 @@ namespace TiendaVideojuegos
         {
             if (string.IsNullOrEmpty(txtEliminar.Text))
             {
-                MessageBox.Show($"Ingrese el nombre del videojuego: ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Ingrese el nombre del videojuego ", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -94,21 +136,43 @@ namespace TiendaVideojuegos
                 {
                     MessageBox.Show($"No se ha podido elminar el videojuego: {videoJu.nombre}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
             }
-           
         }
 
         private void btnContCantVid_Click(object sender, EventArgs e)
         {
-            int cantidad = ListaVideoJuego.Count();
-            MessageBox.Show("Cantidad de videojuegos " + cantidad);
+            if (csv)
+            {
+                int cantidad = ListaVideoJuego.Count();
+                MessageBox.Show($"Cantidad de videojuegos : {cantidad}","", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Abra archivo csv", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int cantidadPorPlataforma = ListaVideoJuego.Where(s => s.plataforma == cbContCantVidPorPlat.Text).Count() ;
-            MessageBox.Show("Cantidad por plataforma es :" + cantidadPorPlataforma);
+            if (csv)
+            {
+                if (string.IsNullOrEmpty(cbContCantVidPorPlat.Text))
+                {
+                    MessageBox.Show("Seleccione la plataforma de videojuego", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    int cantidadPorPlataforma = ListaVideoJuego.Where(s => s.plataforma == cbContCantVidPorPlat.Text).Count();
+                    MessageBox.Show($"Cantidad por plataforma es : {cantidadPorPlataforma}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Abra archivo csv", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         
@@ -118,8 +182,8 @@ namespace TiendaVideojuegos
 
         private void btnMostHor_Click(object sender, EventArgs e)
         {
-            string horaActual = DateTime.Now.ToString("HH");
-            MessageBox.Show("La hora actual es : " + horaActual);
+            string horaActual = DateTime.Now.ToString("F");
+            MessageBox.Show($"La Fecha actual es : {horaActual}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
        
 
@@ -133,8 +197,6 @@ namespace TiendaVideojuegos
                 MessageBox.Show("TE DIJE QUE NO ME PRESIONARAS MÁS DE 10 VECES, ADIÓS", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-            
-            
         }
 
 
@@ -152,8 +214,27 @@ namespace TiendaVideojuegos
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int cantidadPorCadena = ListaVideoJuego.Where(s => s.nombre.Contains(txtContCantVidPorCad.Text)).Count();
-            MessageBox.Show("Cantidad por cadena es :" + cantidadPorCadena);
+            
+
+            if (csv)
+            {      
+
+                if (string.IsNullOrEmpty(txtContCantVidPorCad.Text))
+                {
+
+                    MessageBox.Show("Ingrese una cadena", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    int cantidadPorCadena = ListaVideoJuego.Where(s => s.nombre.Contains(txtContCantVidPorCad.Text)).Count();
+                    MessageBox.Show("Cantidad por cadena es :" + cantidadPorCadena);
+                }
+            }
+            else
+            {
+               MessageBox.Show("Cargue un archivo csv", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -183,6 +264,11 @@ namespace TiendaVideojuegos
         private void btnObtNomUsuario_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"Tu nombre de usuario es: {Environment.UserName}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void cbContCantVidPorPlat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
