@@ -18,6 +18,25 @@ namespace TiendaVideojuegos
         {
             InitializeComponent();
             button1.Enabled = false;
+            btnEliminar.Enabled = false;
+            btnAgregar.Enabled = false;
+            cbContCantVidPorPlat.Enabled = false;
+            btnBuscar.Enabled = false;
+            txtBuscar.Enabled = false;
+            txtEliminar.Enabled = false;
+            txtContCantVidPorCad.Enabled = false;
+            cbPlataforma.Enabled = false;
+            txtNombre.Enabled = false;
+            button2.Enabled = false;
+            button3.Enabled = false;
+            txtContCantVidPorCad.Enabled = false;
+            btnContCantVid.Enabled = false;
+        }
+
+
+        private void DisableAndEnabled(bool EstaCargadaLaWea)
+        {
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -41,9 +60,23 @@ namespace TiendaVideojuegos
                 ListaVideoJuego = openCsv.VideoJuegoListFromCSV(openFile.FileName);
                 csv = true;
                 ReloadDataGrid();
-                
+                button1.Enabled = true;
+                btnEliminar.Enabled = true;
+                btnAgregar.Enabled = true;
+                cbContCantVidPorPlat.Enabled = true;
+                btnBuscar.Enabled = true;
+                txtBuscar.Enabled = true;
+                txtEliminar.Enabled = true;
+                txtContCantVidPorCad.Enabled = true;
+                cbPlataforma.Enabled = true;
+                txtNombre.Enabled = true;
+                button2.Enabled = true;
+                button3.Enabled = true;
+                txtContCantVidPorCad.Enabled = true;
+                btnContCantVid.Enabled = true;
             }
-            button1.Enabled = true;
+
+
         }
 
 

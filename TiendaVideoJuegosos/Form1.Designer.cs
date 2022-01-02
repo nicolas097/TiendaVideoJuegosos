@@ -150,6 +150,7 @@
             // 
             // cbPlataforma
             // 
+            this.cbPlataforma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlataforma.FormattingEnabled = true;
             this.cbPlataforma.Items.AddRange(new object[] {
             "xone",
